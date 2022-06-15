@@ -1,0 +1,31 @@
+{
+  "name": "tdd-jest-practice",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "jest",
+    "watch": "jest --watch *.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Wolfushima/TDD-Jest-Practice.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Wolfushima/TDD-Jest-Practice/issues"
+  },
+  "homepage": "https://github.com/Wolfushima/TDD-Jest-Practice#readme",
+  "devDependencies": {
+    "@babel/preset-env": "^7.18.2",
+    "eslint": "^8.17.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "jest": "^28.1.1"
+  }
+}
