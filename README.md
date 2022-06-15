@@ -2,7 +2,7 @@
 
 Assigment to practice **Test Driven Development** using JavaScript testing framework **Jest**.
 
-###### Capitalize
+## Capitalize
 
 Function that takes a string and returns it with the first character capitalized.
 
