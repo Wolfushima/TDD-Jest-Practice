@@ -311,3 +311,59 @@ test('Only Strings', () => {
   expect(caesarCipher(123)).toBe('Only Strings');
 });
 ```
+
+## Analyze Array
+
+Function that takes an array of numbers and returns an object with the following properties: average, min, max, and length.
+
+> analyze-array.js
+
+```javascript
+const notValidArray = (array) =>
+  array.some((element) => typeof element !== 'number');
+
+export default function analyzeArray(array) {
+  if (Array.isArray(array)) {
+    if (notValidArray(array)) {
+      return 'Only numbers';
+    }
+    const sortedArray = array.sort((a, b) => a - b);
+    const average =
+      array.reduce((previous, current) => previous + current) / array.length;
+    const min = sortedArray[0];
+    const max = sortedArray[array.length - 1];
+    const { length } = array;
+
+    return {
+      average,
+      min,
+      max,
+      length,
+    };
+  }
+  return 'Not an array';
+}
+```
+
+> analyze-array.test.js
+
+```javascript
+import analyzeArray from '../scripts/analyze-array';
+
+test('Return object with average, min, max and length properties', () => {
+  expect(analyzeArray([1, 8, 3, 4, 2, 6])).toMatchObject({
+    average: 4,
+    min: 1,
+    max: 8,
+    length: 6,
+  });
+});
+
+test('Not an array', () => {
+  expect(analyzeArray('1,8,3,4,2,6')).toBe('Not an array');
+});
+
+test('Only Numbers', () => {
+  expect(analyzeArray([1, 8, 3, 4, 2, '6'])).toBe('Only numbers');
+});
+```
