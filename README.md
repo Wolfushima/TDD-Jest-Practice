@@ -156,3 +156,158 @@ test('Works with negative values', () => {
   expect(calculator.multiply(-3, -3)).toBe(9);
 });
 ```
+
+## Caesar Cipher
+
+Function that takes a string and returns it with each character “shifted”.
+
+> caesar-cipher.js
+
+```javascript
+const isLetter = (string) => {
+  if (/[a-zA-Z]/.test(string)) {
+    return true;
+  }
+  return false;
+};
+
+const isLowerCase = (string) => {
+  if (string.toLowerCase() === string) {
+    return true;
+  }
+  return false;
+};
+
+const isUpperCase = (string) => {
+  if (string.toUpperCase() === string) {
+    return true;
+  }
+  return false;
+};
+
+export default function caesarCipher(string) {
+  if (typeof string !== 'string') {
+    return 'Only Strings';
+  }
+
+  const alphabet = [
+    'a',
+    'b',
+    'c',
+    'd',
+    'e',
+    'f',
+    'g',
+    'h',
+    'i',
+    'j',
+    'k',
+    'l',
+    'm',
+    'n',
+    'o',
+    'p',
+    'q',
+    'r',
+    's',
+    't',
+    'u',
+    'v',
+    'w',
+    'x',
+    'y',
+    'z',
+  ];
+  const alphabetCapitalized = [
+    'A',
+    'B',
+    'C',
+    'D',
+    'E',
+    'F',
+    'G',
+    'H',
+    'I',
+    'J',
+    'K',
+    'L',
+    'M',
+    'N',
+    'O',
+    'P',
+    'Q',
+    'R',
+    'S',
+    'T',
+    'U',
+    'V',
+    'W',
+    'X',
+    'Y',
+    'Z',
+  ];
+
+  const arrayFromString = Array.from(string);
+  const newString = [];
+
+  arrayFromString.forEach((character) => {
+    if (isLetter(character)) {
+      if (isLowerCase(character)) {
+        const letterIndex = alphabet.indexOf(character);
+        let index = letterIndex + 1;
+        if (index > alphabet.length - 1) {
+          index -= alphabet.length;
+        }
+        newString.push(alphabet[index]);
+      }
+      if (isUpperCase(character)) {
+        const letterIndex = alphabetCapitalized.indexOf(character);
+        let index = letterIndex + 1;
+        if (index > alphabet.length - 1) {
+          index -= alphabet.length;
+        }
+        newString.push(alphabetCapitalized[index]);
+      }
+    } else {
+      newString.push(character);
+    }
+  });
+  return newString.join('');
+}
+```
+
+> caesar-cipher.test.js
+
+```javascript
+import caesarCipher from '../scripts/caesar-cipher';
+
+test('Returns a string with each character shifted', () => {
+  expect(caesarCipher('abc')).toBe('bcd');
+});
+
+test('Works with z', () => {
+  expect(caesarCipher('zabc')).toBe('abcd');
+});
+
+test('Works with every letter in the alphabet', () => {
+  expect(caesarCipher('abcdefghijklmnopqrstuvwxyz')).toBe(
+    'bcdefghijklmnopqrstuvwxyza'
+  );
+});
+
+test('Works with capital letters', () => {
+  expect(caesarCipher('zAbCZ')).toBe('aBcDA');
+});
+
+test('Works with special characters and spaces', () => {
+  expect(caesarCipher('abc !#$%...wXyZ')).toBe('bcd !#$%...xYzA');
+});
+
+test('Works with numbers', () => {
+  expect(caesarCipher('zAbCZ123')).toBe('aBcDA123');
+});
+
+test('Only Strings', () => {
+  expect(caesarCipher(123)).toBe('Only Strings');
+});
+```
